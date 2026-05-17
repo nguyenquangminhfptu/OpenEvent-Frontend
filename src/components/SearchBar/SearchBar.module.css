@@ -1,99 +1,120 @@
 .searchBar {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1.6fr auto;
-  gap: 16px;
+  gap: var(--space-base);
   align-items: end;
-  background: #fff;
+  background: var(--surface-1);
   border-radius: 18px;
-  padding: 20px 24px;
-  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.18);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-xl);
 }
 
 .field {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  gap: 6px;
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 6px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--accent);
+  letter-spacing: var(--tracking-snug);
+  line-height: 1.2;
 }
 
 .input {
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
   padding: 12px 14px;
-  font-size: 14px;
-  color: var(--text);
-  background: #fff;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  width: 100%;
   font-family: inherit;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  color: var(--text-1);
+  background: var(--surface-1);
+  outline: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+  width: 100%;
+  min-height: 44px;
+  line-height: 1.4;
+}
+
+.input::placeholder {
+  color: var(--text-4);
 }
 
 .input:hover {
-  border-color: #cbd5e1;
+  border-color: var(--text-4);
 }
 
-.input:focus {
+.input:focus-visible {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.15);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
-/* Highlight effect like the screenshot (filled search field) */
+/* Filled state: subtle brand-tinted background — replaces arbitrary lavender */
 .field:first-child .input:not(:placeholder-shown) {
-  background: #eef0ff;
+  background: var(--primary-tint);
 }
 
 .dateRange {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .dateRange .input {
   flex: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .dash {
-  color: var(--muted);
-  font-weight: 600;
+  color: var(--text-3);
+  font-weight: var(--weight-semibold);
   flex-shrink: 0;
+  font-size: var(--text-lg);
 }
 
 .submit {
   background: var(--primary);
-  color: #fff;
+  color: var(--surface-1);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 12px 28px;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  height: 44px;
-  white-space: nowrap;
-  transition: background 0.15s ease, transform 0.15s ease;
   font-family: inherit;
+  font-weight: var(--weight-bold);
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-snug);
+  cursor: pointer;
+  min-height: 44px;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .submit:hover {
   background: var(--primary-600);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .submit:active {
   transform: translateY(0);
+  background: var(--primary-700);
 }
 
 @media (max-width: 900px) {
   .searchBar {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 16px;
+    gap: var(--space-md);
+    padding: var(--space-base);
   }
 
   .submit {
@@ -103,14 +124,8 @@
 }
 
 @media (max-width: 560px) {
-  .searchBar {
-    grid-template-columns: 1fr;
-  }
+  .searchBar { grid-template-columns: 1fr; }
 
-  .dateRange {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
+  .dateRange { flex-direction: column; align-items: stretch; }
   .dash { display: none; }
 }

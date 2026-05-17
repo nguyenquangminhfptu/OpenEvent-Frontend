@@ -1,17 +1,152 @@
 :root {
-  --bg: #ffffff;
-  --bg-muted: #f6f8fb;
-  --text: #0f172a;
-  --muted: #475569;
+  /* === Brand =============================================================== */
+  --primary: oklch(70% 0.18 47);              /* #ff6a00 */
+  --primary-600: oklch(74% 0.17 47);          /* lighter hover */
+  --primary-700: oklch(64% 0.18 45);          /* darker active */
+  --primary-soft: oklch(95% 0.05 50);         /* tinted surface for hover bg */
+  --primary-tint: oklch(97% 0.025 55);        /* even subtler tint */
 
-  --primary: #ff6a00;
-  --primary-600: #ff7f24;
-  --primary-700: #e85f00;
-  --accent: #0e1a4f;
+  --accent: oklch(22% 0.1 270);               /* deep navy #0e1a4f */
+  --accent-700: oklch(28% 0.1 270);           /* hover lighter */
 
-  --radius: 16px;
-  --shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
+  /* === Neutrals (warm-tinted toward brand) ================================= */
+  /* Pure #fff / #000 violate shared design laws; every neutral is tinted
+     toward the brand hue (50° = orange) at low chroma. */
+  --surface-0: oklch(100% 0 0);               /* pure for image overlays only */
+  --surface-1: oklch(99% 0.004 60);           /* card / popover body */
+  --surface-2: oklch(97% 0.008 60);           /* page background */
+  --surface-3: oklch(95% 0.012 60);           /* muted surface */
+  --surface-4: oklch(91% 0.015 60);           /* subtle distinct surface */
+
+  --border-subtle: oklch(91% 0.012 60);       /* default border */
+  --border-medium: oklch(85% 0.014 60);       /* input border, hover */
+
+  --text-1: oklch(20% 0.04 265);              /* primary text */
+  --text-2: oklch(38% 0.03 265);              /* secondary text */
+  --text-3: oklch(52% 0.025 260);             /* muted body */
+  --text-4: oklch(68% 0.02 255);              /* placeholder */
+
+  /* Backwards-compat aliases (old token names mapped to new neutrals) */
+  --bg: var(--surface-1);
+  --bg-muted: var(--surface-3);
+  --text: var(--text-1);
+  --muted: var(--text-3);
+  --muted-strong: var(--text-2);
+  --border: var(--border-subtle);
+
+  /* === Semantic state ====================================================== */
+  --danger: oklch(63% 0.22 27);                /* live / error */
+  --success: oklch(65% 0.16 145);
+  --warning: oklch(78% 0.15 70);
+
+  /* Medal palette (universally recognized — keep, but tokenize) */
+  --medal-gold: oklch(75% 0.16 80);
+  --medal-silver: oklch(72% 0.02 250);
+  --medal-bronze: oklch(58% 0.13 50);
+
+  /* === Spacing ============================================================= */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  --section-snug: var(--space-xl);
+  --section-base: var(--space-2xl);
+  --section-loose: var(--space-3xl);
+
+  /* === Radii =============================================================== */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --radius: var(--radius-lg);  /* default alias */
+
+  /* === Shadows ============================================================= */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 6px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --shadow-xl: 0 20px 50px rgba(15, 23, 42, 0.18);
+  --shadow: var(--shadow-md);  /* default alias */
+
+  /* === Layout ============================================================== */
   --container: 1200px;
-  --space: clamp(48px, 8vw, 96px);
-  --border: rgba(2, 6, 23, 0.08);
+
+  /* === Typography ========================================================== */
+  --font-sans:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  --font-mono:
+    ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.75rem, 2.5vw + 0.75rem, 2.5rem);
+  --text-3xl: clamp(2.25rem, 4vw + 1rem, 3.5rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.2;
+  --leading-normal: 1.4;
+  --leading-relaxed: 1.55;
+  --leading-loose: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* === Motion ============================================================= */
+  /* Ease-out cubic — natural deceleration. Never bounce or elastic. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* === Touch / Z =========================================================== */
+  --touch-target: 44px;
+
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+}
+
+/* Respect user preference for reduced motion — make all transitions instant */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

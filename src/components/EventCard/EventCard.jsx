@@ -15,38 +15,50 @@ export default function EventCard({ event, variant = 'default', showCheckin = fa
 
   const href = `/${event.eventType.toLowerCase()}/${event.id}`;
   const showCheckinBtn = showCheckin && canCheckIn(event.startsAt);
+  const cardClass = `${styles.card} ${styles[variant] || ''}`;
 
   return (
-    <article className={`${styles.card} ${styles[variant] || ''}`}>
+    <article className={cardClass}>
       <a href={href} className={styles.link}>
-        <img
-          className={styles.cover}
-          src={event.imageUrl}
-          alt={event.title}
-          loading="lazy"
-        />
+        <div className={styles.media}>
+          <img
+            className={styles.cover}
+            src={event.imageUrl}
+            alt=""
+            loading="lazy"
+          />
+          {event.live && (
+            <span className={`badge badge-live ${styles.liveBadge}`}>● Live</span>
+          )}
+        </div>
         <div className={styles.body}>
-          <h3 className={styles.title}>{event.title}</h3>
-          <p className={styles.meta}>
-            {event.city} • {event.dateLabel} • {event.durationLabel}
-          </p>
-          <p className={styles.org}>Organizer: {event.organizer}</p>
+          <div className={styles.headline}>
+            <h3 className={styles.title}>{event.title}</h3>
+            <p className={styles.meta}>
+              <span>{event.city}</span>
+              <span className={styles.dot} aria-hidden="true">·</span>
+              <span>{event.dateLabel}</span>
+              <span className={styles.dot} aria-hidden="true">·</span>
+              <span>{event.durationLabel}</span>
+            </p>
+          </div>
+
+          <p className={styles.org}>By {event.organizer}</p>
 
           <div className={styles.capacity}>
             <div className={styles.capacityRow}>
               <span>
-                Registered: {event.registered} / {event.capacity}
+                {event.registered} / {event.capacity} registered
               </span>
-              <span className={styles.price}>Price: {event.priceLabel}</span>
+              <span className={styles.price}>{event.priceLabel}</span>
             </div>
-            <div className={styles.bar}>
+            <div className={styles.bar} aria-hidden="true">
               <div className={styles.fill} style={{ width: `${percentage}%` }} />
             </div>
           </div>
 
           <div className={styles.tags}>
             <span className="tag">#{event.eventTypeTag}</span>
-            {event.live && <span className="badge badge-live">Live</span>}
             {event.soldOut && <span className="tag">Sold Out</span>}
           </div>
         </div>

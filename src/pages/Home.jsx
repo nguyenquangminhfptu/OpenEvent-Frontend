@@ -4,6 +4,7 @@ import HeroSlider from '../components/HeroSlider/HeroSlider.jsx';
 import SearchBar from '../components/SearchBar/SearchBar.jsx';
 import EventSection from '../components/EventSection/EventSection.jsx';
 import StudentPodium from '../components/StudentPodium/StudentPodium.jsx';
+import Footer from '../components/Footer/Footer.jsx';
 import {
   posterEvents,
   myEvents,
@@ -28,13 +29,19 @@ export default function Home() {
     <>
       <Header activeMenu="home" />
 
+      <h1 className={styles.srOnly}>
+        OpenEvent — Discover, register, and check in to events near you
+      </h1>
+
       <main>
         <HeroSlider slides={posterEvents} />
 
-        <div className={styles.searchCenter}>
+        {/* Search rail: tightly coupled with hero (overlap), then breathes
+            into the first content section */}
+        <div className={styles.searchRail}>
           <div className="container">
-            <SearchBar onSearch={(q) => console.log('search:', q)} />
-            <div className="chip-row">
+            <SearchBar />
+            <div className="chip-row" role="group" aria-label="Quick filters">
               {recoChips.map((c) => (
                 <button
                   key={c.key}
@@ -48,38 +55,53 @@ export default function Home() {
           </div>
         </div>
 
+        {/* RAIL: user's own events — horizontal scroll signals "personal queue" */}
         <EventSection
-          title="Your Events"
+          title="Your upcoming events"
           events={myEvents}
+          variant="rail"
           viewAllHref="/orders"
           showCheckin
+          rhythm="snug"
           emptyMessage="Bạn chưa đăng ký sự kiện nào."
         />
 
+        {/* GRID: discover — the canonical browse surface */}
         <EventSection
-          title="Latest Events"
+          // eyebrow="Discover"
+          title="Latest events"
           events={latestEvents}
+          variant="grid"
           filters={['all', 'Music', 'Workshop', 'Festival', 'Competition', 'Conference']}
-          pageSize={3}
+          pageSize={6}
+          rhythm="base"
           emptyMessage="Chưa có sự kiện mới."
         />
 
+        {/* COMPACT: live now — compact list reads as "happening right now" */}
         <EventSection
-          title="Live Events"
+          title="Live events"
           events={liveEvents}
-          filters={['all', 'Music', 'Workshop', 'Conference', 'Festival', 'Competition']}
-          pageSize={3}
+          variant="compact"
+          rhythm="snug"
+          muted
           emptyMessage="Hiện không có sự kiện đang diễn ra."
         />
 
+        {/* Podium: distinct content type — biggest rhythmic break */}
         <StudentPodium students={topStudents} />
 
+        {/* FEATURE: editorial 1+2 layout — closes the page with focus */}
         <EventSection
-          title="💡 Recommended for You"
+          title="Recommended for you"
           events={recommendedEvents}
+          variant="feature"
+          rhythm="loose"
           emptyMessage="Chưa có gợi ý cho bạn."
         />
       </main>
+
+      <Footer />
     </>
   );
 }

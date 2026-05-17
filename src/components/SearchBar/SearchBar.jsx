@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import styles from './SearchBar.module.css';
 
 const TYPES = [
@@ -12,6 +12,7 @@ const TYPES = [
 ];
 
 export default function SearchBar({ onSearch }) {
+  const baseId = useId();
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('all');
   const [from, setFrom] = useState('');
@@ -25,19 +26,25 @@ export default function SearchBar({ onSearch }) {
   return (
     <form className={styles.searchBar} onSubmit={handleSubmit}>
       <div className={styles.field}>
-        <label className={styles.label}>Search</label>
+        <label htmlFor={`${baseId}-keyword`} className={styles.label}>
+          Search
+        </label>
         <input
+          id={`${baseId}-keyword`}
           type="text"
           className={styles.input}
-          placeholder="Music"
+          placeholder="Music, workshop, name..."
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
         />
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label}>Type</label>
+        <label htmlFor={`${baseId}-type`} className={styles.label}>
+          Type
+        </label>
         <select
+          id={`${baseId}-type`}
           className={styles.input}
           value={type}
           onChange={(e) => setType(e.target.value)}
@@ -51,17 +58,19 @@ export default function SearchBar({ onSearch }) {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label}>Time</label>
+        <span className={styles.label}>Time</span>
         <div className={styles.dateRange}>
           <input
             type="date"
+            aria-label="From"
             className={styles.input}
             value={from}
             onChange={(e) => setFrom(e.target.value)}
           />
-          <span className={styles.dash}>–</span>
+          <span className={styles.dash} aria-hidden="true">–</span>
           <input
             type="date"
+            aria-label="To"
             className={styles.input}
             value={to}
             onChange={(e) => setTo(e.target.value)}
