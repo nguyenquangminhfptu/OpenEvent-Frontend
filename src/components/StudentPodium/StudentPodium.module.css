@@ -1,0 +1,151 @@
+.frame {
+  background: linear-gradient(135deg, #fff 0%, #fef3e8 100%);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(2, 6, 23, 0.08);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.icon {
+  font-size: 28px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slot1 { order: 2; }
+.slot2 { order: 1; }
+.slot3 { order: 3; }
+
+.slotNumber {
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.1);
+  margin-bottom: -16px;
+  line-height: 1;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 16px 20px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.1);
+  text-align: center;
+  border: 3px solid transparent;
+}
+
+.rank1 {
+  border-color: #f59e0b;
+  transform: translateY(-24px);
+  background: linear-gradient(180deg, #fff 0%, #fffbeb 100%);
+}
+
+.rank2 {
+  border-color: #94a3b8;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.rank3 {
+  border-color: #b45309;
+  background: linear-gradient(180deg, #fff 0%, #fef3e8 100%);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rank1 .badge { background: #f59e0b; }
+.rank2 .badge { background: #94a3b8; }
+.rank3 .badge { background: #b45309; }
+
+.titleSmall {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.imageWrap {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid currentColor;
+}
+
+.rank1 .imageWrap { color: #f59e0b; }
+.rank2 .imageWrap { color: #94a3b8; }
+.rank3 .imageWrap { color: #b45309; }
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info { margin-top: 8px; }
+
+.org {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 4px 0;
+  line-height: 1.2;
+}
+
+.points {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .slot1, .slot2, .slot3 { order: initial; }
+  .rank1 { transform: none; }
+}

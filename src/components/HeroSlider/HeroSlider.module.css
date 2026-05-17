@@ -1,0 +1,85 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.6s ease;
+  height: 70vh;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.25) 40%,
+    rgba(0, 0, 0, 0) 75%
+  );
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+  z-index: 2;
+}
+
+.nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.prev { left: 16px; }
+.next { right: 16px; }
+
+.progress {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.progressBar {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.progressBar.active {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .track { height: 50vh; }
+}
