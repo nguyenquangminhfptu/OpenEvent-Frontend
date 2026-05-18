@@ -2,7 +2,9 @@
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: var(--surface-1);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
   padding-top: env(safe-area-inset-top, 0);
 }
@@ -12,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  gap: var(--space-base);
+  gap: var(--space-lg);
 }
 
 .logo {
@@ -29,10 +31,11 @@
   border-radius: var(--radius-sm);
   padding: 4px 6px;
   margin-inline: -6px;
+  flex-shrink: 0;
 }
 
 .logoImg {
-  height: 44px;
+  height: 38px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -40,44 +43,120 @@
 
 .logoText {
   letter-spacing: var(--tracking-snug);
+  color: var(--accent);
 }
 
 /* === Desktop nav =========================================================== */
 .navDesktop {
   display: flex;
-  gap: var(--space-sm);
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
 }
 
 .navLink {
+  position: relative;
   text-decoration: none;
   color: var(--text-2);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   font-size: var(--text-base);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
+  padding: 8px 14px;
   letter-spacing: var(--tracking-snug);
   transition:
-    color var(--duration-fast) var(--ease-out),
-    background var(--duration-fast) var(--ease-out);
+    color var(--duration-fast) var(--ease-out);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .navLink:hover {
-  color: var(--primary);
-  background: var(--primary-tint);
+  color: var(--accent);
+}
+
+.navLink:hover::after {
+  transform: scaleX(0.6);
+  background: var(--text-3);
 }
 
 .isActive {
-  color: var(--primary);
+  color: var(--accent);
   font-weight: var(--weight-bold);
+}
+
+.isActive::after {
+  transform: scaleX(1);
+  background: var(--primary);
+}
+
+.isActive:hover::after {
+  transform: scaleX(1);
+  background: var(--primary);
 }
 
 .actionsDesktop {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-shrink: 0;
 }
 
-/* === Hamburger button ====================================================== */
+/* === Shared buttons (scoped to header) ===================================== */
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-snug);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  min-height: 42px;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: var(--surface-1);
+  box-shadow: 0 4px 12px rgba(255, 106, 0, 0.25);
+}
+
+.btnPrimary:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255, 106, 0, 0.35);
+}
+
+.btnGhost {
+  color: var(--text-1);
+  background: transparent;
+}
+
+.btnGhost:hover {
+  background: var(--surface-3);
+}
+
+/* === Hamburger ============================================================ */
 .hamburger {
   display: none;
   width: 44px;
@@ -98,13 +177,12 @@
 
 .hamburger:hover {
   border-color: var(--primary);
-  background: var(--primary-tint);
 }
 
 .hamburger span {
   width: 18px;
   height: 2px;
-  background: var(--accent);
+  background: var(--primary);
   border-radius: var(--radius-pill);
   transition:
     transform var(--duration-slow) var(--ease-out),
@@ -112,24 +190,17 @@
   transform-origin: center;
 }
 
-.hamburgerOpen span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.hamburgerOpen span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.hamburgerOpen span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
+.hamburgerOpen span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburgerOpen span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburgerOpen span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* === Backdrop ============================================================== */
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: var(--z-overlay);
   opacity: 0;
   pointer-events: none;
@@ -147,7 +218,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(320px, 85vw);
+  width: min(340px, 88vw);
   background: var(--surface-1);
   z-index: calc(var(--z-overlay) + 1);
   transform: translateX(100%);
@@ -178,7 +249,7 @@
   align-items: center;
   text-decoration: none;
   color: var(--text-1);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   font-size: var(--text-md);
   padding: 14px var(--space-md);
   border-radius: var(--radius-md);
@@ -209,15 +280,22 @@
   gap: var(--space-sm);
 }
 
-.drawerActions :global(.btn) {
+.drawerActions .btnPrimary,
+.drawerActions .btnGhost {
   width: 100%;
+  min-height: 48px;
 }
 
 /* === Breakpoints =========================================================== */
-@media (max-width: 768px) {
-  .inner { height: 60px; }
-  .logoImg { height: 36px; }
-  .navDesktop,
+/* At 900px: collapse nav AND auth actions into the drawer at the same time.
+   Avoids a dead zone where the nav is hidden but the hamburger hasn't appeared. */
+@media (max-width: 900px) {
+  .navDesktop { display: none; }
   .actionsDesktop { display: none; }
   .hamburger { display: inline-flex; }
+}
+
+@media (max-width: 768px) {
+  .inner { height: 64px; gap: var(--space-base); }
+  .logoImg { height: 32px; }
 }

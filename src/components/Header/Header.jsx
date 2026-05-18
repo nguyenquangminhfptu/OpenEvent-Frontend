@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 const navItems = [
   { key: 'home', label: 'Home', href: '/' },
   { key: 'events', label: 'Events', href: '/events' },
-  { key: 'orders', label: 'My Event', href: '/orders' },
+  { key: 'orders', label: 'My events', href: '/orders' },
   { key: 'about', label: 'About', href: '/about' },
 ];
 
@@ -25,28 +25,12 @@ export default function Header({ activeMenu = 'home', user = null }) {
 
   const close = () => setOpen(false);
 
-  const renderAuthLinks = (onClick) =>
-    user ? (
-      <a href="/profile" className="btn btn-ghost" onClick={onClick}>
-        {user.name || 'Profile'}
-      </a>
-    ) : (
-      <>
-        <a href="/login" className="btn btn-ghost" onClick={onClick}>
-          Login
-        </a>
-        <a href="/register" className="btn btn-primary" onClick={onClick}>
-          Sign up
-        </a>
-      </>
-    );
-
   return (
     <header className={styles.header}>
       <div className="container">
         <div className={styles.inner}>
           <a href="/" className={styles.logo} onClick={close}>
-            <img src={logo} alt="OpenEvent" className={styles.logoImg} />
+            <img src={logo} alt="" className={styles.logoImg} />
             <span className={styles.logoText}>OpenEvent</span>
           </a>
 
@@ -66,7 +50,20 @@ export default function Header({ activeMenu = 'home', user = null }) {
             })}
           </nav>
 
-          <div className={styles.actionsDesktop}>{renderAuthLinks()}</div>
+          <div className={styles.actionsDesktop}>
+            {user ? (
+              <a href="/profile" className={styles.btnGhost}>
+                {user.name || 'Profile'}
+              </a>
+            ) : (
+              <>
+                <a href="/login" className={styles.btnGhost}>Sign in</a>
+              </>
+            )}
+            <a href="/host" className={styles.btnPrimary}>
+              Host event
+            </a>
+          </div>
 
           <button
             type="button"
@@ -113,7 +110,25 @@ export default function Header({ activeMenu = 'home', user = null }) {
             );
           })}
         </nav>
-        <div className={styles.drawerActions}>{renderAuthLinks(close)}</div>
+        <div className={styles.drawerActions}>
+          <a
+            href="/host"
+            className={styles.btnPrimary}
+            onClick={close}
+            tabIndex={open ? 0 : -1}
+          >
+            Host event
+          </a>
+          {user ? (
+            <a href="/profile" className={styles.btnGhost} onClick={close} tabIndex={open ? 0 : -1}>
+              {user.name || 'Profile'}
+            </a>
+          ) : (
+            <a href="/login" className={styles.btnGhost} onClick={close} tabIndex={open ? 0 : -1}>
+              Sign in
+            </a>
+          )}
+        </div>
       </aside>
     </header>
   );

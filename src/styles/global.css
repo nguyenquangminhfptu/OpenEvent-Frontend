@@ -12,6 +12,10 @@ html {
 html, body {
   margin: 0;
   padding: 0;
+  /* Hard guard against any rogue horizontal scroll caused by negative
+     margins, wide grids, or stat layouts. `clip` doesn't break sticky. */
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
@@ -27,6 +31,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* Old-browser fallback (Chrome <90 etc.) */
+@supports not (overflow-x: clip) {
+  html, body { overflow-x: hidden; }
+}
+
+/* Common overflow root causes — defensive resets */
+img, video, svg { max-width: 100%; }
+
+/* Page-level landmarks should always fill the viewport, never constrain. */
+header, main, footer, section, article, aside { width: 100%; }
 
 p { text-wrap: pretty; }
 h1, h2, h3, h4 { text-wrap: balance; }
@@ -136,16 +151,20 @@ a:focus-visible {
 .grid-3 { grid-template-columns: 1fr; }
 .grid-4 { grid-template-columns: 1fr; }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-lg);
   }
+  .grid-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1200px) {
   .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 

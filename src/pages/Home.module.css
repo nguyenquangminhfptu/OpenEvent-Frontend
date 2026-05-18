@@ -1,26 +1,35 @@
-/* Search rail overlaps hero on desktop, sits below on mobile.
-   The overlap is a visual trick that costs vertical space on tiny screens. */
-.searchRail {
+/* Search panel is centered exactly on the boundary between the hero and the
+   first content section. Half overlaps the poster image, half overlaps the
+   page background. Pull-up value ≈ half the search bar's actual height per
+   breakpoint (panel grows taller as columns collapse). */
+.searchAnchor {
   position: relative;
-  margin-top: calc(var(--space-2xl) * -1);
-  margin-bottom: var(--space-2xl);
+  margin-top: -36px;
+  margin-bottom: var(--space-lg);
   z-index: var(--z-sticky);
 }
 
-@media (max-width: 900px) {
-  .searchRail {
-    margin-top: calc(var(--space-lg) * -1);
+.searchPanel {
+  position: relative;
+}
+
+/* At 1100px the panel goes 2-col → 3 rows tall (~176px). */
+@media (max-width: 1100px) {
+  .searchAnchor {
+    margin-top: -88px;
     margin-bottom: var(--space-xl);
   }
 }
 
+/* At 560px the panel stacks 1-col → ~240px tall. */
 @media (max-width: 560px) {
-  .searchRail {
-    margin-top: var(--space-base);
-    margin-bottom: var(--space-lg);
+  .searchAnchor {
+    margin-top: -110px;
+    margin-bottom: var(--space-xl);
   }
 }
 
+/* === Screen-reader-only ==================================================== */
 .srOnly {
   position: absolute;
   width: 1px;

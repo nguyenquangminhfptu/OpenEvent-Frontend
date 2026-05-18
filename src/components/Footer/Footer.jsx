@@ -3,16 +3,16 @@ import logo from '../../assets/logo.png';
 import styles from './Footer.module.css';
 
 const navLinks = [
-  { label: 'Sự kiện sắp tới', href: '/events' },
-  { label: 'Đăng ký tham gia', href: '/events?freeOnly=true' },
-  { label: 'Top Event', href: '/events?reco=trending' },
-  { label: 'Liên hệ', href: '/contact' },
+  { label: 'Upcoming events', href: '/events' },
+  { label: 'Free events', href: '/events?freeOnly=true' },
+  { label: 'Trending', href: '/events?reco=trending' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const contacts = [
   { label: 'Email', value: 'contact@openevent.vn', href: 'mailto:contact@openevent.vn' },
   { label: 'Phone', value: '0900 000 000', href: 'tel:0900000000' },
-  { label: 'Address', value: 'ĐH FPT Đà Nẵng' },
+  { label: 'Address', value: 'FPT University, Da Nang' },
 ];
 
 const socials = [
@@ -67,8 +67,8 @@ export default function Footer() {
               <span>OpenEvent</span>
             </a>
             <p className={styles.tagline}>
-              Nền tảng quản lý & tham gia sự kiện dành cho sinh viên FPT —
-              nhanh chóng, tiện lợi, kết nối cộng đồng.
+              Event discovery and management for the FPT student community —
+              fast, intuitive, and built to connect.
             </p>
             <ul className={styles.socials} aria-label="Social links">
               {socials.map((s) => (
@@ -121,7 +121,7 @@ export default function Footer() {
           <div className={styles.col}>
             <h3 className={styles.colTitle}>Newsletter</h3>
             <p className={styles.newsletterIntro}>
-              Đăng ký để nhận thông báo về sự kiện mới và tin tức từ OpenEvent.
+              Get notified about new events and updates straight to your inbox.
             </p>
             <form className={styles.newsletter} onSubmit={onSubmit}>
               <label htmlFor={emailId} className={styles.srOnly}>
@@ -145,13 +145,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className={styles.cta} role="note">
-        <div className="container">
-          <p>
-            Tạo và quản lý sự kiện dễ dàng với OpenEvent — bắt đầu ngay hôm nay.
-          </p>
-        </div>
-      </div>
     </footer>
   );
 }

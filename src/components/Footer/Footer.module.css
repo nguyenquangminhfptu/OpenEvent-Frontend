@@ -1,6 +1,6 @@
 .footer {
-  background: var(--accent);
-  color: oklch(92% 0.015 250);
+  background: var(--primary);
+  color: var(--surface-1);
   margin-top: var(--space-3xl);
   /* Light-on-dark compensation: more leading + medium weight */
   line-height: 1.65;
@@ -60,7 +60,7 @@
   margin: 0;
   font-size: var(--text-sm);
   max-width: 38ch;
-  color: oklch(85% 0.015 250);
+  color: oklch(95% 0.015 60);
 }
 
 .socials {
@@ -78,8 +78,8 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-pill);
-  background: oklch(28% 0.05 260);
-  color: oklch(92% 0.015 250);
+  background: oklch(64% 0.18 45);
+  color: var(--surface-1);
   transition:
     background var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
@@ -93,8 +93,8 @@
 
 .socialLink:hover,
 .socialLink:focus-visible {
-  background: var(--primary);
-  color: var(--surface-1);
+  background: var(--surface-1);
+  color: var(--primary);
   transform: translateY(-2px);
 }
 
@@ -127,7 +127,7 @@
 }
 
 .link {
-  color: oklch(88% 0.015 250);
+  color: oklch(97% 0.015 60);
   text-decoration: none;
   font-size: var(--text-base);
   font-weight: var(--weight-medium);
@@ -141,18 +141,18 @@
 
 .link:hover,
 .link:focus-visible {
-  color: var(--primary);
+  color: var(--surface-1);
   border-bottom-color: currentColor;
   outline: none;
 }
 
 .contactList li {
   font-size: var(--text-base);
-  color: oklch(88% 0.015 250);
+  color: oklch(97% 0.015 60);
 }
 
 .contactLabel {
-  color: oklch(70% 0.015 250);
+  color: var(--surface-1);
   font-weight: var(--weight-semibold);
 }
 
@@ -160,14 +160,14 @@
 .newsletterIntro {
   margin: 0;
   font-size: var(--text-sm);
-  color: oklch(82% 0.015 250);
+  color: oklch(97% 0.015 60);
   max-width: 36ch;
 }
 
 .newsletter {
   display: flex;
   gap: var(--space-sm);
-  background: var(--surface-1);
+  background: oklch(97% 0.01 60);
   padding: 4px;
   border-radius: var(--radius-pill);
   margin-top: var(--space-xs);
@@ -218,22 +218,6 @@
   transform: translateY(0);
 }
 
-/* === CTA band ============================================================== */
-.cta {
-  background: var(--primary);
-  color: var(--surface-1);
-  font-weight: var(--weight-semibold);
-  font-size: var(--text-base);
-  letter-spacing: var(--tracking-snug);
-  text-align: center;
-  padding-block: var(--space-base);
-}
-
-.cta p {
-  margin: 0;
-  line-height: 1.4;
-}
-
 /* === Utility =============================================================== */
 .srOnly {
   position: absolute;
@@ -250,5 +234,4 @@
 @media (max-width: 640px) {
   .grid { padding-block: var(--space-xl); }
   .footer { margin-top: var(--space-2xl); }
-  .cta { font-size: var(--text-sm); padding-block: var(--space-md); }
 }

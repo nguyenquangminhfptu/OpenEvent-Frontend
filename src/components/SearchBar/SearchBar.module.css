@@ -1,131 +1,189 @@
-.searchBar {
+.panel {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.6fr auto;
-  gap: var(--space-base);
-  align-items: end;
-  background: var(--surface-1);
-  border-radius: 18px;
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-xl);
+  grid-template-columns: 1.5fr auto 1.1fr auto 1.6fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  /* Glassmorphism — purposeful: floats over hero image */
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 22px;
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 30px 80px rgba(15, 23, 42, 0.25),
+    0 12px 32px rgba(15, 23, 42, 0.15);
 }
 
 .field {
   display: flex;
   flex-direction: column;
+  gap: 4px;
   min-width: 0;
-  gap: 6px;
+  padding-block: 4px;
 }
 
 .label {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  color: var(--accent);
-  letter-spacing: var(--tracking-snug);
-  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-2);
+  line-height: 1;
+}
+
+.label svg {
+  color: var(--primary);
 }
 
 .input {
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
+  border: 0;
+  background: transparent;
   font-family: inherit;
-  font-size: var(--text-base);
-  font-weight: var(--weight-regular);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
   color: var(--text-1);
-  background: var(--surface-1);
-  outline: none;
-  transition:
-    border-color var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
-    background var(--duration-fast) var(--ease-out);
   width: 100%;
-  min-height: 44px;
-  line-height: 1.4;
+  outline: none;
+  padding: 4px 0;
+  letter-spacing: var(--tracking-snug);
+  min-width: 0;
 }
 
 .input::placeholder {
   color: var(--text-4);
+  font-weight: var(--weight-medium);
 }
 
-.input:hover {
-  border-color: var(--text-4);
+.selectWrap {
+  position: relative;
 }
 
-.input:focus-visible {
-  border-color: var(--primary);
-  outline: none;
-  box-shadow: 0 0 0 3px var(--primary-soft);
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 22px;
 }
 
-/* Filled state: subtle brand-tinted background — replaces arbitrary lavender */
-.field:first-child .input:not(:placeholder-shown) {
-  background: var(--primary-tint);
+.selectChevron {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-medium);
 }
 
 .dateRange {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 6px;
 }
 
-.dateRange .input {
-  flex: 1;
+.dateInput {
   font-variant-numeric: tabular-nums;
-}
-
-.dash {
-  color: var(--text-3);
+  font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
-  flex-shrink: 0;
-  font-size: var(--text-lg);
 }
 
+.dateInput::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.dateInput::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.rangeDash {
+  color: var(--text-3);
+  font-weight: var(--weight-bold);
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+}
+
+/* === Submit ================================================================ */
 .submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
   background: var(--primary);
   color: var(--surface-1);
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 12px 28px;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 24px;
   font-family: inherit;
   font-weight: var(--weight-bold);
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   letter-spacing: var(--tracking-snug);
   cursor: pointer;
-  min-height: 44px;
+  min-height: 52px;
   white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(255, 106, 0, 0.35);
   transition:
     background var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out);
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.submit svg {
+  color: var(--surface-1);
 }
 
 .submit:hover {
   background: var(--primary-600);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 12px 32px rgba(255, 106, 0, 0.45);
 }
 
 .submit:active {
-  transform: translateY(0);
   background: var(--primary-700);
+  transform: translateY(0);
 }
 
-@media (max-width: 900px) {
-  .searchBar {
+/* === Responsive ============================================================ */
+/* At 1100px the 6-col layout breaks. Switch to 2-col grid and let the date
+   field span both columns since it contains two inputs. */
+@media (max-width: 1100px) {
+  .panel {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+    gap: var(--space-base);
     padding: var(--space-base);
+    border-radius: 20px;
   }
-
+  .divider { display: none; }
+  /* The 3rd field (When) contains two inputs — give it full row */
+  .field:nth-of-type(3) { grid-column: 1 / -1; }
   .submit {
     grid-column: 1 / -1;
     width: 100%;
+    justify-content: center;
   }
 }
 
 @media (max-width: 560px) {
-  .searchBar { grid-template-columns: 1fr; }
+  .panel { grid-template-columns: 1fr; }
+  .field:nth-of-type(3) { grid-column: auto; }
+  .dateRange { gap: var(--space-xs); }
+  .dateInput { font-size: var(--text-xs); padding-block: 6px; }
+}
 
-  .dateRange { flex-direction: column; align-items: stretch; }
-  .dash { display: none; }
+@media (prefers-reduced-transparency: reduce) {
+  .panel {
+    background: var(--surface-1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }

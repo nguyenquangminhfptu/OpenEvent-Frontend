@@ -5,6 +5,13 @@
   flex-wrap: wrap;
 }
 
+/* Slot for custom filter UI rendered between section header and grid.
+   Pulled up slightly to tighten the gap to the title row. */
+.headerSlot {
+  margin-top: calc(var(--space-base) - var(--space-lg));
+  margin-bottom: var(--space-lg);
+}
+
 @media (max-width: 768px) {
   .headerControls {
     width: 100%;

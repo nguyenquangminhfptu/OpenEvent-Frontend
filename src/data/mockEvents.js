@@ -1,9 +1,25 @@
+import student1 from '../assets/topstudent/sinhvien1.jpg';
+import student2 from '../assets/topstudent/sinhvien2.jpg';
+import student3 from '../assets/topstudent/sinhvien3.jpg';
+import banner1 from '../assets/banner/banner1.png';
+import banner2 from '../assets/banner/banner2.jpeg';
+import banner3 from '../assets/banner/banner3.jpg';
+import event1 from '../assets/event/event1.jpg';
+import event2 from '../assets/event/event2.jpg';
+import event3 from '../assets/event/event3.jpg';
+import event4 from '../assets/event/event4.jpg';
+import event6 from '../assets/event/event6.jpg';
+import event7 from '../assets/event/event7.jpg';
+import event8 from '../assets/event/event8.jpg';
+import event9 from '../assets/event/event9.jpg';
+import event10 from '../assets/event/event10.jpg';
+
 const img = (seed) => `https://picsum.photos/seed/${seed}/800/500`;
 
 export const posterEvents = [
-  { id: 1, title: 'FPTU Tech Connect 2026', imageUrl: img('fpt-tech-connect') },
-  { id: 2, title: 'FPTU Music Festival', imageUrl: img('fpt-music-fest') },
-  { id: 3, title: 'Startup Day FPT University', imageUrl: img('fpt-startup-day') },
+  { id: 1, title: 'FPTU Tech Connect 2026', imageUrl: banner1 },
+  { id: 2, title: 'FPTU Music Festival', imageUrl: banner2 },
+  { id: 3, title: 'Startup Day FPT University', imageUrl: banner3 },
 ];
 
 const make = (overrides) => ({
@@ -36,7 +52,7 @@ export const myEvents = [
     dateLabel: '20/09/2026',
     durationLabel: '3h',
     organizer: 'FPT Design Club',
-    imageUrl: img('fpt-uiux'),
+    imageUrl: event1,
     eventType: 'WORKSHOP',
     eventTypeTag: 'Workshop',
     registered: 90,
@@ -51,7 +67,7 @@ export const myEvents = [
     dateLabel: 'Hôm nay',
     durationLabel: '2h',
     organizer: 'FPT Music Club',
-    imageUrl: img('fpt-acoustic'),
+    imageUrl: event2,
     eventType: 'MUSIC',
     eventTypeTag: 'Music',
     registered: 216,
@@ -70,7 +86,7 @@ export const latestEvents = [
     dateLabel: '28/09/2026',
     durationLabel: '2h',
     organizer: 'FPT Data Science Club',
-    imageUrl: img('fpt-dataviz'),
+    imageUrl: event3,
     eventType: 'WORKSHOP',
     eventTypeTag: 'Workshop',
     registered: 120,
@@ -84,7 +100,7 @@ export const latestEvents = [
     dateLabel: '30/09/2026',
     durationLabel: '2.5h',
     organizer: 'FPT Innovation Hub',
-    imageUrl: img('fpt-startup'),
+    imageUrl: event4,
     eventType: 'CONFERENCE',
     eventTypeTag: 'Conference',
     registered: 300,
@@ -98,7 +114,7 @@ export const latestEvents = [
     dateLabel: '05/10/2026',
     durationLabel: '3h',
     organizer: 'FPT Coding Club',
-    imageUrl: img('fpt-coding'),
+    imageUrl: event6,
     eventType: 'COMPETITION',
     eventTypeTag: 'Competition',
     registered: 150,
@@ -112,7 +128,7 @@ export const latestEvents = [
     dateLabel: '22/09/2026',
     durationLabel: '2h',
     organizer: 'FPT Event Club',
-    imageUrl: img('fpt-summerfest'),
+    imageUrl: event7,
     eventType: 'FESTIVAL',
     eventTypeTag: 'Festival',
     registered: 480,
@@ -126,7 +142,7 @@ export const latestEvents = [
     dateLabel: '10/10/2026',
     durationLabel: '3h',
     organizer: 'FPT Indie Club',
-    imageUrl: img('fpt-indie'),
+    imageUrl: event8,
     eventType: 'MUSIC',
     eventTypeTag: 'Music',
     registered: 220,
@@ -140,7 +156,7 @@ export const latestEvents = [
     dateLabel: '15/10/2026',
     durationLabel: '24h',
     organizer: 'FPT GDSC',
-    imageUrl: img('fpt-hackathon'),
+    imageUrl: event9,
     eventType: 'COMPETITION',
     eventTypeTag: 'Competition',
     registered: 95,
@@ -158,7 +174,7 @@ export const liveEvents = [
     dateLabel: 'Hôm nay',
     durationLabel: '2h',
     organizer: 'FPT Music Club',
-    imageUrl: img('fpt-acoustic-live'),
+    imageUrl: event10,
     eventType: 'MUSIC',
     eventTypeTag: 'Music',
     registered: 216,
@@ -173,7 +189,7 @@ export const liveEvents = [
     dateLabel: 'Hôm nay',
     durationLabel: '1h',
     organizer: 'FPT GDSC',
-    imageUrl: img('fpt-ai-workshop'),
+    imageUrl: event2,
     eventType: 'WORKSHOP',
     eventTypeTag: 'Workshop',
     registered: 110,
@@ -188,7 +204,7 @@ export const liveEvents = [
     dateLabel: 'Hôm nay',
     durationLabel: '3h',
     organizer: 'FPT Business Club',
-    imageUrl: img('fpt-tech-summit'),
+    imageUrl: event3,
     eventType: 'CONFERENCE',
     eventTypeTag: 'Conference',
     registered: 352,
@@ -206,20 +222,20 @@ export const topStudents = [
     name: 'NGUYỄN QUANG MINH',
     organization: 'FPT University Đà Nẵng',
     points: 2450,
-    imageUrl: img('student-1'),
+    imageUrl: student1,
   },
   {
     rank: 2,
     name: 'TRẦN HOÀNG NAM',
     organization: 'FPT University Đà Nẵng',
     points: 2210,
-    imageUrl: img('student-2'),
+    imageUrl: student2,
   },
   {
     rank: 3,
     name: 'LÊ THU HẰNG',
     organization: 'FPT University Đà Nẵng',
     points: 2080,
-    imageUrl: img('student-3'),
+    imageUrl: student3,
   },
 ];

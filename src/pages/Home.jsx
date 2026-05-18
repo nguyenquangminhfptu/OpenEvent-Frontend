@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Header from '../components/Header/Header.jsx';
 import HeroSlider from '../components/HeroSlider/HeroSlider.jsx';
 import SearchBar from '../components/SearchBar/SearchBar.jsx';
+import CategoryChips from '../components/CategoryChips/CategoryChips.jsx';
 import EventSection from '../components/EventSection/EventSection.jsx';
 import StudentPodium from '../components/StudentPodium/StudentPodium.jsx';
 import Footer from '../components/Footer/Footer.jsx';
@@ -15,15 +16,13 @@ import {
 } from '../data/mockEvents.js';
 import styles from './Home.module.css';
 
-const recoChips = [
-  { key: 'for-you', label: 'For you' },
-  { key: 'near-you', label: 'Near you' },
-  { key: 'trending', label: 'Trending' },
-  { key: 'free', label: 'Free' },
-];
-
 export default function Home() {
-  const [reco, setReco] = useState('for-you');
+  const [category, setCategory] = useState('all');
+
+  const filteredLatest = useMemo(() => {
+    if (category === 'all') return latestEvents;
+    return latestEvents.filter((ev) => ev.eventTypeTag === category);
+  }, [category]);
 
   return (
     <>
@@ -36,26 +35,16 @@ export default function Home() {
       <main>
         <HeroSlider slides={posterEvents} />
 
-        {/* Search rail: tightly coupled with hero (overlap), then breathes
-            into the first content section */}
-        <div className={styles.searchRail}>
+        {/* Glass search panel overlapping hero edge */}
+        <div className={styles.searchAnchor}>
           <div className="container">
-            <SearchBar />
-            <div className="chip-row" role="group" aria-label="Quick filters">
-              {recoChips.map((c) => (
-                <button
-                  key={c.key}
-                  className={`chip ${reco === c.key ? 'is-active' : ''}`}
-                  onClick={() => setReco(c.key)}
-                >
-                  {c.label}
-                </button>
-              ))}
+            <div className={styles.searchPanel}>
+              <SearchBar />
             </div>
           </div>
         </div>
 
-        {/* RAIL: user's own events — horizontal scroll signals "personal queue" */}
+        {/* RAIL: personal queue */}
         <EventSection
           title="Your upcoming events"
           events={myEvents}
@@ -63,41 +52,43 @@ export default function Home() {
           viewAllHref="/orders"
           showCheckin
           rhythm="snug"
-          emptyMessage="Bạn chưa đăng ký sự kiện nào."
+          emptyMessage="You haven't registered for any events yet."
         />
 
-        {/* GRID: discover — the canonical browse surface */}
+        {/* COMPACT: live now */}
         <EventSection
-          // eyebrow="Discover"
-          title="Latest events"
-          events={latestEvents}
-          variant="grid"
-          filters={['all', 'Music', 'Workshop', 'Festival', 'Competition', 'Conference']}
-          pageSize={6}
-          rhythm="base"
-          emptyMessage="Chưa có sự kiện mới."
-        />
-
-        {/* COMPACT: live now — compact list reads as "happening right now" */}
-        <EventSection
-          title="Live events"
+          title="Happening live"
           events={liveEvents}
           variant="compact"
           rhythm="snug"
           muted
-          emptyMessage="Hiện không có sự kiện đang diễn ra."
+          emptyMessage="No events happening live right now."
         />
 
-        {/* Podium: distinct content type — biggest rhythmic break */}
+        {/* GRID: Latest events with category filter as header slot */}
+        <EventSection
+          title={category === 'all' ? 'Latest events' : `${category} events`}
+          events={filteredLatest}
+          variant="grid"
+          rhythm="base"
+          viewAllHref="/events"
+          emptyMessage="No events match this filter."
+          headerSlot={
+            <CategoryChips active={category} onChange={setCategory} />
+          }
+        />
+
+
+        {/* Podium: distinct content shape */}
         <StudentPodium students={topStudents} />
 
-        {/* FEATURE: editorial 1+2 layout — closes the page with focus */}
+        {/* FEATURE: editorial 1+2 close */}
         <EventSection
           title="Recommended for you"
           events={recommendedEvents}
           variant="feature"
           rhythm="loose"
-          emptyMessage="Chưa có gợi ý cho bạn."
+          emptyMessage="No recommendations for you yet."
         />
       </main>
 

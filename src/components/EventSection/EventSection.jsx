@@ -21,7 +21,8 @@ export default function EventSection({
   className = '',
   rhythm = 'base',
   muted = false,
-  emptyMessage = 'Chưa có sự kiện nào.',
+  emptyMessage = 'No events to display.',
+  headerSlot = null,
 }) {
   const [activeFilter, setActiveFilter] = useState('all');
   const [page, setPage] = useState(0);
@@ -63,28 +64,33 @@ export default function EventSection({
             <h2 className="section-title">{title}</h2>
           </div>
 
-          <div className={styles.headerControls}>
-            {filters.length > 0 && (
-              <div className="chip-group">
-                {filters.map((f) => (
-                  <button
-                    key={f}
-                    className={`chip ${activeFilter === f ? 'is-active' : ''}`}
-                    onClick={() => onFilterChange(f)}
-                  >
-                    {f === 'all' ? 'All' : f}
-                  </button>
-                ))}
-              </div>
-            )}
+          {(filters.length > 0 || viewAllHref) && (
+            <div className={styles.headerControls}>
+              {filters.length > 0 && (
+                <div className="chip-group">
+                  {filters.map((f) => (
+                    <button
+                      key={f}
+                      type="button"
+                      className={`chip ${activeFilter === f ? 'is-active' : ''}`}
+                      onClick={() => onFilterChange(f)}
+                    >
+                      {f === 'all' ? 'All' : f}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-            {viewAllHref && (
-              <a className={styles.viewAll} href={viewAllHref}>
-                View all <span aria-hidden="true">→</span>
-              </a>
-            )}
-          </div>
+              {viewAllHref && (
+                <a className={styles.viewAll} href={viewAllHref}>
+                  View all <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          )}
         </header>
+
+        {headerSlot && <div className={styles.headerSlot}>{headerSlot}</div>}
 
         {filtered.length > 0 ? (
           <>
